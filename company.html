@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #container  {
+            border: 1px solid #000000;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            max-width: 300px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container" class="text-center">
+        <strong>UNIKPOL S.A.</strong><br>
+        ul. Ukryta<br>
+        02-114 Rawa Mazowiecka<br>
+        tel. 22 345 90 21, 888 213 992<br>
+        <a href="http://unikpol.pl">http://unikpol.pl</a>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<div id="app">{{ message }}</div>
+
+<script>
+  const { createApp, ref } = Vue
+
+  createApp({
+    setup() {
+      const message = ref()
+      return {
+        message
+      }
+    }
+  }).mount('#app')
+</script>
+</body>
+</html>
