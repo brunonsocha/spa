@@ -1,0 +1,46 @@
+<!-- ...existing code... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Counter (Vue)</title>
+  <style>
+    #counterBtn{
+      font-size:20px;
+      border:2px solid #000;
+      background:#fff;
+      cursor:pointer;
+      user-select:none;
+      border-radius:6px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button id="counterBtn"
+            @mousedown="onMouseDown"
+            @contextmenu.prevent
+            tabindex="0"
+            aria-label="click">
+      {{ count }} clicks
+    </button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue;
+
+    createApp({
+      setup() {
+        const count = ref(0);
+        function onMouseDown(e) {
+          if (e.button === 0) count.value--;
+          else if (e.button === 2) count.value++;
+        }
+        return { count, onMouseDown };
+      }
+    }).mount('#app');
+  </script>
+</body>
+</html>
