@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book</title>
+</head>
+<body>
+    <div id="app">
+        <label>Tytuł:</label>
+        <input type="text" v-model="book.title">
+        <br>
+        <label>Autor książki:</label>
+        <input type="text" v-model="book.author">
+        <br>
+        <button @click="saveToConsole">Zapisz</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp, ref } = Vue
+      createApp({
+        setup() {
+          const book = ref({
+            title: '',
+            author: ''
+          })
+          const saveToConsole = () => {
+            console.log("Książka:");
+            console.log("Tytuł:", book.value.title);
+            console.log("Autor:", book.value.author);
+          }
+          return { book, saveToConsole }
+        }
+      }).mount('#app')
+    </script>
+</body>
+</html>

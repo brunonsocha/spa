@@ -1,33 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo</title>
+    <style>
+        .header {
+            text-transform: uppercase;
+            margin-bottom: 0;
+        }
+        ol {
+          padding-left: 0;
+          list-style-position: inside;
+          margin-top: 0;
+        }
+    </style>
 </head>
 <body>
-    DO WYKONANIA
-    <ol>
-        <li>Purchase two tickets to cinema</li>
-        <li>...</li>
-        <li>...</li>
-        <li>...</li>
-    </ol>
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-<div id="app">{{ message }}</div>
+    <div id="app">
+        <div class="header">{{ title }}</div>
+        <ol>
+            <li v-for="(task, index) in tasks" :key="index">
+                {{ task }}
+            </li>
+        </ol>
+    </div>
 
-<script>
-  const { createApp, ref } = Vue
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
-  createApp({
-    setup() {
-      const message = ref()
-      return {
-        "DO WYKONANIA"
-      }
-    }
-  }).mount('#app')
-</script>
+    <script>
+        const { createApp, ref } = Vue;
+
+        createApp({
+            setup() {
+                const title = ref("DO WYKONANIA");
+                const tasks = ref([
+                    "Purchase two tickets to cinema",
+                    "...",
+                    "...",
+                    "..."
+                ]);
+
+                return {
+                    title,
+                    tasks
+                };
+            }
+        }).mount('#app');
+    </script>
 </body>
 </html>
