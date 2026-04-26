@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Products</title>
+</head>
+<body>
+  <div id="app">
+    <label>Produkt:</label>
+    <input type="text" v-model="productFilter">
+
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Nazwa produktu</th>
+          <th>Cena jednostkowa</th>
+          <th>Ilość</th>
+          <th>Wartość</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="product in filteredProducts" :key="product.name">
+          <td>{{ product.name }}</td>
+          <td>{{ product.price }} zł</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.price * product.quantity }} zł</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    const { createApp, ref, computed } = Vue
+
+    createApp({
+      setup() {
+        const productFilter = ref('')
+
+        const products = ref([
+          { name: 'book', price: 17, quantity: 3 },
+          { name: 'pen', price: 4, quantity: 10 },
+          { name: 'notebook', price: 12, quantity: 5 },
+          { name: 'pencil', price: 2, quantity: 8 }
+        ])
+
+        const filteredProducts = computed(() => {
+          return products.value.filter(product =>
+            product.name.toLowerCase().includes(productFilter.value.toLowerCase())
+          )
+        })
+
+        return { productFilter, filteredProducts }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>

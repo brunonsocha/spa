@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <title>Product</title>
     <style>
         #app {
@@ -20,12 +21,11 @@
         <div>Product: {{ receipt.product }}</div>
         <div>Unit Price: {{ receipt.price }} zł</div>
         <div>Quantity: {{ receipt.quantity }}</div>
-        <div>Amount: {{ receipt.amount }} zł</div>
+        <div>Amount: {{ amount }} zł</div>
         <div>VAT Tax Rate: {{ receipt.vatRate }}%</div>
         <div>===================</div>
         <div class="bold">Total: {{ total }} zł</div>
     </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
       const { createApp, ref, computed } = Vue
       createApp({
@@ -35,15 +35,16 @@
             product: "book",
             price: 17,
             quantity: 3,
-            amount: 51,
             vatRate: 23
           })
-          const total = computed(() => {
-            const tax = receipt.value.amount * (receipt.value.vatRate / 100);
-            return (receipt.value.amount + tax).toFixed(2);
-          })
+          const amount = computed(() => receipt.value.price * receipt.value.quantity)
 
-          return { receipt, total }
+          const total = computed(() => {
+            const tax = amount.value * (receipt.value.vatRate / 100);
+            return (amount.value + tax).toFixed(2);
+          })
+          
+          return { receipt, amount, total }
         }
       }).mount('#app')
     </script>

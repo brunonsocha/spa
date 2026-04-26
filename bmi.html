@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>BMI</title>
+</head>
+<body>
+    <div id="app">
+        <label>Wzrost w cm:</label>
+        <input type="number" v-model.number="height">
+        <br>
+
+        <label>Masa ciała w kg:</label>
+        <input type="number" v-model.number="weight">
+        <br>
+
+        <button @click="showResult = true">BMI</button>
+        <p v-if="showResult">BMI: {{ bmi }}</p>
+    </div>
+    
+
+    <script>
+        const { createApp, ref, computed } = Vue
+        createApp({
+            setup() {
+                const height = ref(0)
+                const weight = ref(0)
+                const showResult = ref(false)
+
+                const bmi = computed(() => {
+                    const heightInMeters = height.value / 100
+                    return (weight.value / (heightInMeters * heightInMeters)).toFixed(2)
+                })
+                return { height, weight, showResult, bmi }
+            }
+            
+      }).mount('#app')
+    </script>
+</body>
+</html>

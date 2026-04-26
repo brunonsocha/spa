@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini SPA – zadanie</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- MENU NAWIGACYJNE -->
+  <nav>
+    <button @click="currentView = 'home-view'">
+      Strona główna
+    </button>
+
+    <button @click="currentView = 'users-view'">
+      Użytkownicy
+    </button>
+
+    <button @click="currentView = 'about-view'">
+      O aplikacji
+    </button>
+
+    <button @click="currentView = 'stats-view'">
+      Statystyki
+    </button>
+  </nav>
+
+  <!-- AKTUALNY WIDOK -->
+  <component
+    :is="currentView"
+    :users="users"
+    :current-view="currentView">
+  </component>
+
+</div>
+
+
+<script>
+const HomeView = {
+  template: `
+    <section>
+      <h2>Strona główna</h2>
+      <p>Witamy w aplikacji SPA.</p>
+    </section>
+  `
+};
+
+const UsersView = {
+  props: ['users'],
+  template: `
+    <section>
+      <h2>Użytkownicy</h2>
+      <ul>
+        <li v-for="user in users" :key="user.id">
+          {{ user.name }}
+        </li>
+      </ul>
+    </section>
+  `
+};
+
+const AboutView = {
+  template: `
+    <section>
+      <h2>O aplikacji</h2>
+      <p>Aplikacja SPA w Vue.js bez routera.</p>
+    </section>
+  `
+};
+
+const StatsView = {
+  props: ['users', 'currentView'],
+  template: `
+    <section>
+      <h2>Statystyki</h2>
+      <p>Liczba użytkowników: {{ users.length }}</p>
+      <p>Aktualny widok: {{ currentView }}</p>
+    </section>
+  `
+};
+
+
+Vue.createApp({
+  components: {
+    'home-view': HomeView,
+    'users-view': UsersView,
+    'about-view': AboutView,
+    'stats-view': StatsView
+  },
+  data() {
+    return {
+      currentView: 'home-view',
+      users: [
+        { id: 1, name: 'Jan Kowalski' },
+        { id: 2, name: 'Anna Nowak' }
+      ]
+    };
+  }
+}).mount('#app');
+</script>
+
+</body>
+</html>

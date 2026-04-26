@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Counter (Vue)</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Counter</title>
   <style>
     #counterBtn{
       font-size:20px;
@@ -19,13 +20,11 @@
     <button id="counterBtn"
             @mousedown="onMouseDown"
             @contextmenu.prevent
-            tabindex="0"
-            aria-label="click">
+            tabindex="0">
       {{ count }} clicks
     </button>
   </div>
 
-  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   <script>
     const { createApp, ref } = Vue;
 

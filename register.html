@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <title>Rejestracja</title>
+</head>
+<body>
+  <div id="app">
+    <form @submit.prevent="registerUser">
+      <label>Imię i nazwisko:</label>
+      <input type="text" v-model.trim="user.fullName">
+      <br>
+
+      <label>E-mail:</label>
+      <input type="email" v-model.trim="user.email">
+      <br>
+
+      <label>Hasło:</label>
+      <input type="password" v-model="user.password">
+      <br>
+
+      <label>Powtórz hasło:</label>
+      <input type="password" v-model="user.repeatPassword">
+      <br>
+
+      <label>
+        <input type="checkbox" v-model="user.acceptedRules">
+        Akceptuję regulamin
+      </label>
+      <br>
+
+      <button type="submit" :disabled="!isFormValid">
+        Zarejestruj
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const { createApp, reactive, computed } = Vue
+
+    createApp({
+      setup() {
+        const user = reactive({
+          fullName: '',
+          email: '',
+          password: '',
+          repeatPassword: '',
+          acceptedRules: false
+        })
+
+        const isFormValid = computed(() => {
+          return user.fullName !== '' &&
+                 user.email.includes('@') &&
+                 user.password !== '' &&
+                 user.repeatPassword !== '' &&
+                 user.password === user.repeatPassword &&
+                 user.acceptedRules
+        })
+
+        function registerUser() {
+          console.log('Zarejestrowano użytkownika:', user)
+        }
+
+        return { user, isFormValid, registerUser }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
