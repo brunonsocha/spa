@@ -11,11 +11,11 @@
     <form @submit.prevent="registerUser">
       <label>Imię i nazwisko:</label>
       <input type="text" v-model.trim="user.fullName">
-      <br>
+      <br><br>
 
       <label>E-mail:</label>
       <input type="email" v-model.trim="user.email">
-      <br>
+      <br><br>
 
       <label>Hasło:</label>
       <input type="password" v-model="user.password">
@@ -23,13 +23,13 @@
 
       <label>Powtórz hasło:</label>
       <input type="password" v-model="user.repeatPassword">
-      <br>
+      <br><br>
 
       <label>
         <input type="checkbox" v-model="user.acceptedRules">
         Akceptuję regulamin
       </label>
-      <br>
+      <br><br>
 
       <button type="submit" :disabled="!isFormValid">
         Zarejestruj
