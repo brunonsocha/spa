@@ -8,16 +8,17 @@
 </head>
 <body>
     <div id="app">
-        <label>Wzrost w cm:</label>
+        <label>wzrost w cm:</label>
         <input type="number" v-model.number="height">
         <br>
 
-        <label>Masa ciała w kg:</label>
+        <label>masa ciała w kg:</label>
         <input type="number" v-model.number="weight">
-        <br>
+        <br><br>
 
         <button @click="showResult = true">BMI</button>
-        <p v-if="showResult">BMI: {{ bmi }}</p>
+
+        <p v-if="showResult" style="font-size: 18px; font-weight: bold;">{{ bmi }}</p>
     </div>
     
 

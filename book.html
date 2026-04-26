@@ -8,31 +8,36 @@
 </head>
 <body>
     <div id="app">
-        <label>Tytuł:</label>
+        <label>Tytuł: </label>
         <input type="text" v-model="book.title">
         <br>
-        <label>Autor książki:</label>
+        <label>Imię i nazwisko autora: </label>
         <input type="text" v-model="book.author">
         <br>
         <button @click="saveToConsole">Zapisz</button>
     </div>
 
     <script>
-      const { createApp, ref } = Vue
+      const { createApp } = Vue
+
       createApp({
-        setup() {
-          const book = ref({
-            title: '',
-            author: ''
-          })
-          const saveToConsole = () => {
-            console.log("Książka:");
-            console.log("Tytuł:", book.value.title);
-            console.log("Autor:", book.value.author);
+        data() {
+          return {
+            book: {
+              title: '',
+              author: ''
+            }
           }
-          return { book, saveToConsole }
+        },
+        methods: {
+          saveToConsole() {
+            console.log('Książka:')
+            console.log('Tytuł:', this.book.title)
+            console.log('Autor:', this.book.author)
+          }
         }
       }).mount('#app')
+
     </script>
 </body>
 </html>
