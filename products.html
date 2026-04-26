@@ -14,10 +14,10 @@
     <table border="1">
       <thead>
         <tr>
-          <th>Product Name</th>
-          <th>Unit Price</th>
-          <th>Quantity</th>
-          <th>Total Value</th>
+          <th>nazwa produktu</th>
+          <th>cena jednostkowa</th>
+          <th>ilość</th>
+          <th>wartość</th>
         </tr>
       </thead>
       <tbody>
@@ -39,10 +39,10 @@
         const productFilter = ref('')
 
         const products = ref([
-          { name: 'book', price: 17, quantity: 3 },
-          { name: 'pen', price: 4, quantity: 10 },
-          { name: 'notebook', price: 12, quantity: 5 },
-          { name: 'pencil', price: 2, quantity: 8 }
+          { name: 'zeszyt czarny', price: 17, quantity: 3 },
+          { name: 'ołówek', price: 4, quantity: 10 },
+          { name: 'zeszyt zielony', price: 12, quantity: 5 },
+          { name: 'długopis czarny', price: 2, quantity: 8 }
         ])
 
         const filteredProducts = computed(() => {
